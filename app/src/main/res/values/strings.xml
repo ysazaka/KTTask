@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">KT Task</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="name">Nome</string>
+    <string name="password">Senha</string>
+    <string name="email">E-mail</string>
+    <string name="sign_up">Cadastrar</string>
+    <string name="fill_all_fields">Preencha todos os campos</string>
+    <string name="unexpected_error">Algo de errado aconteceu! Tente novamente!</string>
+    <string name="email_exists">E-mail já está em uso!</string>
+</resources>

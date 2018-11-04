@@ -1,5 +1,6 @@
 package com.yakuzasqn.kttask.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -7,10 +8,14 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.yakuzasqn.kttask.R
+import com.yakuzasqn.kttask.util.SecurityPreferences
+import com.yakuzasqn.kttask.util.TaskConstants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private lateinit var mSecurityPreferences: SecurityPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +28,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        mSecurityPreferences = SecurityPreferences(this)
     }
 
     override fun onBackPressed() {
@@ -43,11 +50,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_logout -> {
-
+                handleLogout()
             }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun handleLogout() {
+        mSecurityPreferences.removeStoredString(TaskConstants.KEY.USER_ID)
+        mSecurityPreferences.removeStoredString(TaskConstants.KEY.USER_NAME)
+        mSecurityPreferences.removeStoredString(TaskConstants.KEY.USER_EMAIL)
+
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 }

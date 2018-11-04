@@ -1,4 +1,4 @@
-package util
+package com.yakuzasqn.kttask.util
 
 class DatabaseConstants {
 
@@ -13,4 +13,25 @@ class DatabaseConstants {
         }
     }
 
+    object PRIORITY {
+        val TABLE_NAME = "priority"
+
+        object COLUMNS {
+            val ID = "id"
+            val DESCRIPTION = "description"
+        }
+    }
+
+    object TASK {
+        val TABLE_NAME = "task"
+
+        object COLUMNS {
+            val ID = "id"
+            val USERID = "user_id"
+            val PRIORITYID = "priority_id"
+            val DESCRIPTION = "description"
+            val COMPLETE = "complete"
+            val DUEDATE = "duedate"
+        }
+    }
 }

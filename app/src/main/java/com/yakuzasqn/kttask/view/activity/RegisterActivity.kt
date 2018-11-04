@@ -9,7 +9,6 @@ import com.yakuzasqn.kttask.R
 import com.yakuzasqn.kttask.business.UserBusiness
 import com.yakuzasqn.kttask.util.ValidationException
 import kotlinx.android.synthetic.main.activity_register.*
-import repository.UserRepository
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 

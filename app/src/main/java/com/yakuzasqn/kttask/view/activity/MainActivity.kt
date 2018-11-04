@@ -3,13 +3,16 @@ package com.yakuzasqn.kttask.view.activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.yakuzasqn.kttask.R
 import com.yakuzasqn.kttask.util.SecurityPreferences
 import com.yakuzasqn.kttask.util.TaskConstants
+import com.yakuzasqn.kttask.view.fragment.TaskListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -30,6 +33,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         mSecurityPreferences = SecurityPreferences(this)
+
+        startDefaultFragment()
     }
 
     override fun onBackPressed() {
@@ -41,21 +46,31 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
+        var fragment: Fragment? = null
+
         when (item.itemId) {
             R.id.nav_done -> {
-                // Handle the camera action
+                fragment = TaskListFragment.newInstance()
             }
             R.id.nav_todo -> {
-
+                fragment = TaskListFragment.newInstance()
             }
             R.id.nav_logout -> {
                 handleLogout()
             }
         }
 
-        drawer_layout.closeDrawer(GravityCompat.START)
+        val fragmentManager = supportFragmentManager
+        fragmentManager.beginTransaction().replace(R.id.fl_content, fragment!!).commit()
+
+        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+        drawer.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun startDefaultFragment(){
+        val fragment: Fragment = TaskListFragment.newInstance()
+        supportFragmentManager.beginTransaction().replace(R.id.fl_content, fragment).commit()
     }
 
     private fun handleLogout() {

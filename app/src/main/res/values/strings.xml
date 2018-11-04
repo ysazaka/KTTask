@@ -15,4 +15,8 @@
     <string name="unexpected_error">Algo de errado aconteceu! Tente novamente!</string>
     <string name="email_exists">E-mail já está em uso!</string>
     <string name="login_fail">Usuário e/ou senha incorretas</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="description">Descrição</string>
 </resources>

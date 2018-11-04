@@ -1,10 +1,10 @@
-package repository
+package com.yakuzasqn.kttask.repository
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import com.yakuzasqn.kttask.entity.UserEntity
-import util.DatabaseConstants
+import com.yakuzasqn.kttask.util.DatabaseConstants
 
 // Singleton pattern
 class UserRepository private constructor(context: Context) {

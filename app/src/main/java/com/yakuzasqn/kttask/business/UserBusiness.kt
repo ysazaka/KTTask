@@ -6,7 +6,7 @@ import com.yakuzasqn.kttask.entity.UserEntity
 import com.yakuzasqn.kttask.util.SecurityPreferences
 import com.yakuzasqn.kttask.util.TaskConstants
 import com.yakuzasqn.kttask.util.ValidationException
-import repository.UserRepository
+import com.yakuzasqn.kttask.repository.UserRepository
 
 class UserBusiness(val context: Context) {
 

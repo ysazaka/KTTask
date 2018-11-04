@@ -1,5 +1,6 @@
 package com.yakuzasqn.kttask.view.activity
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -51,6 +52,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
             // Create a new user
             mUserBusiness.insert(name, email, password)
+
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
 
         } catch (e: ValidationException){
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()

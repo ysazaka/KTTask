@@ -14,4 +14,5 @@
     <string name="fill_all_fields">Preencha todos os campos</string>
     <string name="unexpected_error">Algo de errado aconteceu! Tente novamente!</string>
     <string name="email_exists">E-mail já está em uso!</string>
+    <string name="login_fail">Usuário e/ou senha incorretas</string>
 </resources>

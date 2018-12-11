@@ -10,4 +10,6 @@ class TaskBusiness(val context: Context) {
 
     fun getList(userId: Int): MutableList<TaskEntity> = mTaskRepository.getList(userId)
 
+    fun insert(taskEntity: TaskEntity) = mTaskRepository.insert(taskEntity)
+
 }

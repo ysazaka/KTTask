@@ -6,8 +6,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
+import android.widget.Toast
 import com.yakuzasqn.kttask.R
 import com.yakuzasqn.kttask.business.PriorityBusiness
+import com.yakuzasqn.kttask.business.TaskBusiness
+import com.yakuzasqn.kttask.entity.PriorityEntity
+import com.yakuzasqn.kttask.entity.TaskEntity
+import com.yakuzasqn.kttask.util.SecurityPreferences
+import com.yakuzasqn.kttask.util.TaskConstants
 import kotlinx.android.synthetic.main.activity_task_form.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -15,13 +21,21 @@ import java.util.*
 class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private lateinit var mPriorityBusiness: PriorityBusiness
+    private lateinit var mTaskBusiness: TaskBusiness
+    private lateinit var mSecurityPreferences: SecurityPreferences
+
     private val mSimpleDateFormat: SimpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
+
+    private var mPriorityListEntity: MutableList<PriorityEntity> = mutableListOf()
+    private var mPriorityListId: MutableList<Int> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_form)
 
         mPriorityBusiness = PriorityBusiness(this)
+        mTaskBusiness = TaskBusiness(this)
+        mSecurityPreferences = SecurityPreferences(this)
 
         setListeners()
         loadPriorities()
@@ -34,7 +48,7 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
             }
 
             R.id.btn_save -> {
-
+                handleSave()
             }
         }
     }
@@ -51,6 +65,25 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
         btn_save.setOnClickListener(this)
     }
 
+    private fun handleSave(){
+
+        try {
+
+            val userId = mSecurityPreferences.getStorageString(TaskConstants.KEY.USER_ID).toInt()
+            val priorityId = mPriorityListId[spin_priority.selectedItemPosition]
+            val description = et_description.text.toString()
+            val dueDate = btn_date.text.toString()
+            val complete = check_complete.isChecked
+
+            val taskEntity = TaskEntity(0, userId, priorityId, description, dueDate, complete)
+            mTaskBusiness.insert(taskEntity)
+
+        } catch (e: Exception) {
+            Toast.makeText(this, getString(R.string.unexpected_error), Toast.LENGTH_LONG).show()
+        }
+
+    }
+
     private fun openDatePickerDialog() {
 
         val calendar: Calendar = Calendar.getInstance()
@@ -62,8 +95,9 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
     }
 
     private fun loadPriorities() {
-        val priorityListEntity = mPriorityBusiness.getList()
-        val priorityList = priorityListEntity.map { it.description }
+        mPriorityListEntity = mPriorityBusiness.getList()
+        val priorityList = mPriorityListEntity.map { it.description }
+        mPriorityListId = mPriorityListEntity.map { it.id }.toMutableList()
 
         val adapter = ArrayAdapter<String> (this, android.R.layout.simple_spinner_dropdown_item, priorityList)
         spin_priority.adapter = adapter

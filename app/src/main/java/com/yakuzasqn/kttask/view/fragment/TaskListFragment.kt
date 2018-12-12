@@ -12,6 +12,9 @@ import android.view.ViewGroup
 
 import com.yakuzasqn.kttask.R
 import com.yakuzasqn.kttask.adapter.TaskListAdapter
+import com.yakuzasqn.kttask.business.TaskBusiness
+import com.yakuzasqn.kttask.util.SecurityPreferences
+import com.yakuzasqn.kttask.util.TaskConstants
 import com.yakuzasqn.kttask.view.activity.TaskFormActivity
 import kotlinx.android.synthetic.main.fragment_task_list.view.*
 
@@ -23,6 +26,8 @@ class TaskListFragment : Fragment(), View.OnClickListener {
 
     private lateinit var mContext: Context
     private lateinit var mRecyclerView: RecyclerView
+    private lateinit var mTaskBusiness: TaskBusiness
+    private lateinit var mSecurityPreferences: SecurityPreferences
 
     companion object {
         @JvmStatic
@@ -42,8 +47,18 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         rootView.fab_add_task.setOnClickListener(this)
         mContext = rootView.context
 
+        mTaskBusiness = TaskBusiness(mContext)
+        mSecurityPreferences = SecurityPreferences(mContext)
+
+        val userId = mSecurityPreferences.getStorageString(TaskConstants.KEY.USER_ID).toInt()
+        val taskList = mTaskBusiness.getList(userId)
+
+        for (i in 0..50){
+            taskList.add(taskList[0].copy(description = "Descrição $i"))
+        }
+
         mRecyclerView = rootView.findViewById(R.id.rv_task_list)
-        mRecyclerView.adapter = TaskListAdapter()
+        mRecyclerView.adapter = TaskListAdapter(taskList)
         mRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
         return rootView

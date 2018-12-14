@@ -18,26 +18,33 @@ import com.yakuzasqn.kttask.util.TaskConstants
 import com.yakuzasqn.kttask.view.activity.TaskFormActivity
 import kotlinx.android.synthetic.main.fragment_task_list.view.*
 
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class TaskListFragment : Fragment(), View.OnClickListener {
 
     private lateinit var mContext: Context
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mTaskBusiness: TaskBusiness
     private lateinit var mSecurityPreferences: SecurityPreferences
+    private var mTaskFilter: Int = 0
 
     companion object {
-        @JvmStatic
-        fun newInstance(): TaskListFragment {
-            return TaskListFragment()
+
+        fun newInstance(taskFilter: Int): TaskListFragment {
+            val args: Bundle = Bundle()
+            args.putInt(TaskConstants.TASKFILTER.KEY, taskFilter)
+
+            val fragment = TaskListFragment()
+            fragment.arguments = args
+            return fragment
         }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (arguments != null){
+            mTaskFilter = arguments!!.getInt(TaskConstants.TASKFILTER.KEY)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -71,6 +78,6 @@ class TaskListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun loadTasks(){
-        mRecyclerView.adapter = TaskListAdapter(mTaskBusiness.getList())
+        mRecyclerView.adapter = TaskListAdapter(mTaskBusiness.getList(mTaskFilter))
     }
 }

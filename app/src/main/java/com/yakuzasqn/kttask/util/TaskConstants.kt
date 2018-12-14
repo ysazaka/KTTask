@@ -8,4 +8,10 @@ class TaskConstants {
         val USER_EMAIL = "user_email"
     }
 
+    object TASKFILTER {
+        val KEY = "taskfilterkey"
+        val COMPLETE = 1
+        val TODO = 0
+    }
+
 }

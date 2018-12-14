@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.yakuzasqn.kttask.R
 import com.yakuzasqn.kttask.entity.TaskEntity
+import com.yakuzasqn.kttask.repository.PriorityCacheConstants
 
 class TaskViewHolder (itemView: View): RecyclerView.ViewHolder(itemView) {
 
@@ -16,7 +17,7 @@ class TaskViewHolder (itemView: View): RecyclerView.ViewHolder(itemView) {
 
     fun bindData(task: TaskEntity) {
         tvDescription.text = task.description
-        tvPriority.text = ""
+        tvPriority.text = PriorityCacheConstants.getPriorityDescription(task.priorityId)
         tvDueDate.text = task.dueDate
 
         if (task.complete) {

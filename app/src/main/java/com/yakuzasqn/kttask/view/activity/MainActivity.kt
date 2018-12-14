@@ -10,6 +10,8 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.yakuzasqn.kttask.R
+import com.yakuzasqn.kttask.business.PriorityBusiness
+import com.yakuzasqn.kttask.repository.PriorityCacheConstants
 import com.yakuzasqn.kttask.util.SecurityPreferences
 import com.yakuzasqn.kttask.util.TaskConstants
 import com.yakuzasqn.kttask.view.fragment.TaskListFragment
@@ -19,6 +21,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var mSecurityPreferences: SecurityPreferences
+    private lateinit var mPriorityBusiness: PriorityBusiness
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +36,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         mSecurityPreferences = SecurityPreferences(this)
+        mPriorityBusiness = PriorityBusiness(this)
 
+        loadPriorityCache()
         startDefaultFragment()
     }
 
@@ -71,6 +76,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun startDefaultFragment(){
         val fragment: Fragment = TaskListFragment.newInstance()
         supportFragmentManager.beginTransaction().replace(R.id.fl_content, fragment).commit()
+    }
+
+    private fun loadPriorityCache(){
+        PriorityCacheConstants.setCache(mPriorityBusiness.getList())
     }
 
     private fun handleLogout() {

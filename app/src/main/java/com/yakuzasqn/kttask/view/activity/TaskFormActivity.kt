@@ -78,6 +78,8 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener, DatePickerDi
             val taskEntity = TaskEntity(0, userId, priorityId, description, dueDate, complete)
             mTaskBusiness.insert(taskEntity)
 
+            finish()
+
         } catch (e: Exception) {
             Toast.makeText(this, getString(R.string.unexpected_error), Toast.LENGTH_LONG).show()
         }

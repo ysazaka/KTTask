@@ -50,18 +50,16 @@ class TaskListFragment : Fragment(), View.OnClickListener {
         mTaskBusiness = TaskBusiness(mContext)
         mSecurityPreferences = SecurityPreferences(mContext)
 
-        val userId = mSecurityPreferences.getStorageString(TaskConstants.KEY.USER_ID).toInt()
-        val taskList = mTaskBusiness.getList(userId)
-
-        for (i in 0..50){
-            taskList.add(taskList[0].copy(description = "Descrição $i"))
-        }
-
         mRecyclerView = rootView.findViewById(R.id.rv_task_list)
-        mRecyclerView.adapter = TaskListAdapter(taskList)
+        mRecyclerView.adapter = TaskListAdapter(mutableListOf())
         mRecyclerView.layoutManager = LinearLayoutManager(mContext)
 
         return rootView
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadTasks()
     }
 
     override fun onClick(v: View) {
@@ -70,5 +68,9 @@ class TaskListFragment : Fragment(), View.OnClickListener {
                 startActivity(Intent(mContext, TaskFormActivity::class.java))
             }
         }
+    }
+
+    private fun loadTasks(){
+        mRecyclerView.adapter = TaskListAdapter(mTaskBusiness.getList())
     }
 }

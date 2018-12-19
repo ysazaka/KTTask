@@ -24,4 +24,12 @@ class TaskBusiness(val context: Context) {
 
     fun delete(taskId: Int) = mTaskRepository.delete(taskId)
 
+    fun complete(taskId: Int, isComplete: Boolean) {
+        val task = mTaskRepository.get(taskId)
+        if (task != null){
+            task.complete = isComplete
+            mTaskRepository.update(task)
+        }
+    }
+
 }

@@ -77,6 +77,16 @@ class TaskListFragment : Fragment(), View.OnClickListener {
                 Toast.makeText(mContext, getString(R.string.task_delete_success), Toast.LENGTH_SHORT).show()
             }
 
+            override fun onNotCompleteClick(taskId: Int) {
+                mTaskBusiness.complete(taskId, false)
+                loadTasks()
+            }
+
+            override fun onCompleteClick(taskId: Int) {
+                mTaskBusiness.complete(taskId, true)
+                loadTasks()
+            }
+
         }
 
         mRecyclerView = rootView.findViewById(R.id.rv_task_list)

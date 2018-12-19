@@ -37,6 +37,14 @@ class TaskViewHolder (itemView: View, val context: Context, val listener: OnTask
             showConfirmationDialog(task)
             true
         }
+
+        ivTask.setOnClickListener {
+            if (task.complete){
+                listener.onNotCompleteClick(task.id)
+            } else {
+                listener.onCompleteClick(task.id)
+            }
+        }
     }
 
     private fun showConfirmationDialog(task: TaskEntity){

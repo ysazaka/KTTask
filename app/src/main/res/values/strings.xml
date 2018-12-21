@@ -22,4 +22,6 @@
     <string name="task_insert_success">Tarefa incluída com sucesso!</string>
     <string name="task_update_success">Tarefa atualizada com sucesso!</string>
     <string name="task_delete_success">Tarefa removida com sucesso!</string>
+    <string name="add_task">Adicionar tarefa</string>
+    <string name="update_task">Atualizar tarefa</string>
 </resources>

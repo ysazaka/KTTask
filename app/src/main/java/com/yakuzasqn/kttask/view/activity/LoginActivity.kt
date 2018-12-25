@@ -30,6 +30,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setListeners() {
         btn_login.setOnClickListener(this)
+        tv_register.setOnClickListener(this)
     }
 
     private fun verifyLoggedUser(){
@@ -46,6 +47,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         when(v.id){
             R.id.btn_login -> {
                 handleLogin()
+            }
+            R.id.tv_register -> {
+                startActivity(Intent(this, RegisterActivity::class.java))
             }
         }
     }

@@ -4,55 +4,112 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.activity.TaskFormActivity">
+    tools:context=".view.activity.TaskFormActivity"
+    >
 
     <EditText
         android:id="@+id/et_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/description"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:hint="@string/description"
+        app:layout_constraintTop_toTopOf="parent"
+        android:lines="2"
+        style="@style/mGrayEditText"
         />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="36dp"
+        android:paddingLeft="25dp"
+        android:text="Prioridade"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_description" />
 
     <Spinner
         android:id="@+id/spin_priority"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_description"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ECECEC"
+        app:layout_constraintBottom_toBottomOf="@+id/spin_priority"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent" />
 
     <CheckBox
         android:id="@+id/check_complete"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        style="@style/mGrayTextView"
+        android:layout_width="match_parent"
+        android:layout_height="21dp"
+        android:layout_marginTop="24dp"
+        android:button="@drawable/checkbox_selector"
         android:text="Completa"
+        android:paddingLeft="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spin_priority"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ECECEC"
+        app:layout_constraintBottom_toBottomOf="@+id/check_complete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
         />
 
     <Button
         android:id="@+id/btn_date"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Clique para selecionar a data"
+        android:textColor="@color/colorGrayText"
+        android:textColorHint="@color/colorGrayText"
+        android:textSize="14sp"
+        android:background="@android:color/transparent"
+        android:gravity="center_vertical"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/check_complete"
-        android:text="Clique para selecionar a data"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ECECEC"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
         />
 
     <Button
         android:id="@+id/btn_save"
+        style="@style/mDefaultButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_date"
         android:text="@string/add_task"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
